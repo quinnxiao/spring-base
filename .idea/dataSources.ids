@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL" uuid="439e9b33-844e-4c83-b090-d2574d892833">
+    <database-info product="MySQL" version="5.6.21-log" jdbc-version="4.1" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-8.0.7-dmr ( Revision: d33a3ca56530848bebdf75cf48cf8e68e0feef98 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="quanjing"/>
+    <table name="activity" schema="" catalog="quanjing" type="TABLE"/>
+    <table name="comments" schema="" catalog="quanjing" type="TABLE"/>
+    <table name="contact" schema="" catalog="quanjing" type="TABLE"/>
+    <table name="image" schema="" catalog="quanjing" type="TABLE"/>
+    <table name="live" schema="" catalog="quanjing" type="TABLE"/>
+    <table name="log4j" schema="" catalog="quanjing" type="TABLE"/>
+    <table name="openlive" schema="" catalog="quanjing" type="TABLE"/>
+    <table name="oprationlog" schema="" catalog="quanjing" type="TABLE"/>
+    <table name="praise" schema="" catalog="quanjing" type="TABLE"/>
+    <table name="t_live" schema="" catalog="quanjing" type="TABLE"/>
+    <table name="t_video" schema="" catalog="quanjing" type="TABLE"/>
+    <table name="user" schema="" catalog="quanjing" type="TABLE"/>
+    <table name="version" schema="" catalog="quanjing" type="TABLE"/>
+    <table name="video" schema="" catalog="quanjing" type="TABLE"/>
+    <table name="visit" schema="" catalog="quanjing" type="TABLE"/>
+  </data-source>
+</component>

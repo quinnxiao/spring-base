@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/app/src/main/resources/conf/generatorConfig.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/resources/conf/jdbc.properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/resources/conf/spring-mvc.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/resources/conf/spring-mybatis.xml" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

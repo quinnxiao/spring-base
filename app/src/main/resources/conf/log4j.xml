@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<log4j:configuration>
+    <!-- 可以配置多个appender来对应不同的输出，如文件输出，sql输出，控制台输出，邮件输出等 -->
+    <!-- [控制台STDOUT] 不同的输出类型对应着不同的calss，如控制台输出class对应着 org.apache.log4j.ConsoleAppender -->
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">  <!-- name提供给logger或者root调用 -->
+        <param name="encoding" value="UTF-8"/>
+        <!-- 保存字符集 -->
+        <param name="target" value="System.out"/>
+        <!-- 输出到控制台 -->
+        <layout class="org.apache.log4j.PatternLayout"> <!-- loyout表示输出方式，可以多种，class值区分，PatternLayout表示自定义格式 -->
+            <param name="ConversionPattern" value="[日志来自：%-40.40c{1} 日志类型: %-5p 日志内容：%m]%n"/>
+            <!-- 输出格式，后面解释 -->
+        </layout>
+        <!--filter过滤器设置输出的级别:ALL < DEBUG < INFO < WARN < ERROR < FATAL < OFF
+            所有下面输出的是debug到warn不会有error和fatal
+        -->
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="INFO"/>
+            <param name="levelMax" value="ERROR"/>
+            <param name="AcceptOnMatch" value="true"/>
+            <!-- 答案：http://bbs.csdn.net/topics/350195913 -->
+        </filter>
+    </appender>
+
+    <appender name="database" class="org.apache.log4j.jdbc.JDBCAppender">
+        <param name="URL"
+               value="jdbc:mysql://127.0.0.1:3306/quanjing?useUnicode=true&amp;characterEncoding=utf8&amp;allowMultiQueries=true"/>
+        <param name="driver" value="com.mysql.jdbc.Driver"/>
+        <param name="user" value="root"/>
+        <param name="password" value="root"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="INSERT INTO log4j(stamp,thread, info_level,clazz,message) VALUES ('%d{yyyy-MM-dd HH:mm:ss}', '%t', '%p', '%c', '%m')"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="ERROR"/>
+            <param name="levelMax" value="ERROR"/>
+            <param name="AcceptOnMatch" value="true"/>
+        </filter>
+    </appender>
+
+    <!-- [公共Appender] 这个class表示输入到文件，并且按日期生成新文件-->
+    <appender name="default" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${springmvc.root}/WEB-INF/logs/common"/>
+        <param name="Append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <param name="threshold" value="all"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.log'"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{ISO8601} 耗时：%r [日志来自：%-40.40c{3} 日志类型: %-5p 日志内容：%m]%n"/>
+        </layout>
+    </appender>
+
+    <!-- [debug日志APPENDER] -->
+    <appender name="debug" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${springmvc.root}/WEB-INF/logs/debug"/>
+        <param name="Append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.log'"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{ISO8601} 耗时：%r [日志来自：%-40.40c{3} 日志类型: %-5p 日志内容：%m]%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="DEBUG"/>
+            <param name="levelMax" value="DEBUG"/>
+        </filter>
+    </appender>
+
+    <!-- [info日志APPENDER] -->
+    <appender name="info" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${springmvc.root}/WEB-INF/logs/info"/>
+        <param name="Append" value="false"/>
+        <param name="encoding" value="UTF-8"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.log'"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{ISO8601} 耗时：%r [日志来自：%-40.40c{3} 日志类型: %-5p 日志内容：%m]%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="INFO"/>
+            <param name="levelMax" value="INFO"/>
+        </filter>
+    </appender>
+
+    <!-- [error日志APPENDER] -->
+    <appender name="error" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${springmvc.root}/WEB-INF/logs/error"/>
+        <param name="Append" value="false"/>
+        <param name="encoding" value="UTF-8"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.log'"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{ISO8601} 耗时：%r [日志来自：%-40.40c{3} 日志类型: %-5p 日志内容：%m]%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="ERROR"/>
+            <param name="levelMax" value="ERROR"/>
+        </filter>
+    </appender>
+
+    <!-- debug log -->
+    <!-- name指定的是包名，表示这个logger只记录com.wzw.controller下的所有日志 -->
+    <!--<logger name="com.wzw.controller" additivity="true">  &lt;!&ndash; additivity 是否继承root &ndash;&gt;-->
+    <!-- <level value="${loggingLevel}" />   -->
+    <!--<level value="DEBUG"></level>  &lt;!&ndash; 现在级别 &ndash;&gt;-->
+    <!--<appender-ref ref="DEBUG-APPENDER" />-->
+    <!--</logger>-->
+
+    <!-- info log -->
+    <!-- name指定的是包名，这样只操作此包下的log -->
+    <!--<logger name="com.wzw.controller" additivity="true">-->
+    <!--<level value="INFO"></level>-->
+    <!--<appender-ref ref="INFO-APPENDER" />-->
+    <!--<appender-ref ref="console"/>-->
+    <!--</logger>-->
+
+    <!-- Root Logger -->
+    <!-- 所有logger的父类，记录所有的日志。 -->
+    <root>
+        <level value="ALL"></level>
+        <appender-ref ref="default"/>
+        <appender-ref ref="console"/>
+        <appender-ref ref="database"/>
+        <appender-ref ref="debug"/>
+        <appender-ref ref="info"/>
+        <appender-ref ref="error"/>
+        <!--<appender-ref ref="component"/>-->
+    </root>
+
+</log4j:configuration>
